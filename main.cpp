@@ -56,12 +56,13 @@ static void read_switches(const std::span<const char*>& args, switches& sw)
 
 int main(int argc, const char* argv[])
 {
-	switches sw;
-
-	read_switches(std::span(argv, argc), sw);
 
 	try
 	{
+		switches sw;
+
+		read_switches(std::span(argv, argc), sw);
+
 		const lexertl::memory_file mf(sw._pathname);
 
 		if (sw._leading_ws)
@@ -95,6 +96,7 @@ int main(int argc, const char* argv[])
 	catch (const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
+		return 1;
 	}
 
 	return 0;
