@@ -8,7 +8,7 @@
 
 struct switches
 {
-	std::size_t _indent_val = 2;
+	int _indent_val = 2;
 	bool _leading_ws = false;
 	const char* _pathname = nullptr;
 };
