@@ -43,8 +43,15 @@ void process_json(const switches& sw,
 	}
 
 	if (state._iter->entry.action != parsertl::action::accept)
-		throw std::runtime_error(std::format("Failed to parse {}",
-			sw._pathname));
+	{
+		const char* start = mf.data();
+		const auto& [line, column] = state._iter.line_column(start);
+
+		throw std::runtime_error(std::format("{}:({}:{}): Parse error",
+			sw._pathname,
+			line,
+			column));
+	}
 }
 
 static void print(const bool leading, const int indent, const std::string_view& vw)

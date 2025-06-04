@@ -41,8 +41,8 @@ lexertl::state_machine build_json_lexer(const parsertl::rules& prules,
 
 	if (lexer_only)
 	{
-		lrules.push("^[ \\t]+", prules.token_id("LEADING_WS"));
-		lrules.push("[ \\t]+", lexertl::rules::skip());
+		lrules.push("^[ \t]+", prules.token_id("LEADING_WS"));
+		lrules.push("[ \t]+", lexertl::rules::skip());
 		lrules.push("\r?\n", prules.token_id("'\\n'"));
 	}
 	else
