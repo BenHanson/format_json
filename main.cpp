@@ -19,6 +19,8 @@
 #include <span>
 #include <stdexcept>
 
+const char g_help[] = "format_json <pathname> [--help] [--indent <val>] [--leading-ws]";
+
 static void read_switches(const std::span<const char*>& args, switches& sw)
 {
 	auto iter = args.begin();
@@ -32,7 +34,7 @@ static void read_switches(const std::span<const char*>& args, switches& sw)
 
 		if (strcmp(arg, "--help") == 0)
 		{
-			std::cout << "format_json <pathname> [--help] [--indent <val>] [--leading-ws]\n";
+			std::cout << g_help << '\n';
 			exit(0);
 		}
 		if (strcmp(arg, "--indent") == 0)
@@ -51,7 +53,7 @@ static void read_switches(const std::span<const char*>& args, switches& sw)
 	}
 
 	if (!sw._pathname)
-		throw std::runtime_error("No pathname specified");
+		throw std::runtime_error(std::format("No pathname specified\n{}", g_help));
 }
 
 int main(int argc, const char* argv[])
@@ -76,7 +78,7 @@ int main(int argc, const char* argv[])
 			if (parsertl::match_results results(iter->id, gsm);
 				!parsertl::parse(iter, gsm, results))
 			{
-				throw std::runtime_error(std::format("Failed to parse {}",
+				throw std::runtime_error(std::format("Failed to parse {}\n",
 					sw._pathname));
 			}
 
