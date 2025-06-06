@@ -52,6 +52,8 @@ void process_json(const switches& sw,
 			line,
 			column));
 	}
+
+	std::cout << '\n';
 }
 
 static void print(const bool leading, const int indent, const std::string_view& vw)
@@ -103,4 +105,6 @@ void process_json(const switches& sw, const lexertl::memory_file& mf,
 			leading = false;
 		}
 	}
+
+	std::cout << '\n';
 }
