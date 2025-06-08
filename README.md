@@ -1,5 +1,9 @@
 # format_json
 
+Format JSON splitting over lines, or maintain lines and only normalise leading whitespace with the `--leading-ws` switch.
+
+Requires lexertl17 and parsertl17 to build.
+
  ## Switches
 
  --help
