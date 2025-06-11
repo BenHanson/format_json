@@ -71,19 +71,39 @@ void process_json(const switches& sw, const lexertl::memory_file& mf,
 	lexertl::citerator iter(mf.data(), mf.data() + mf.size(), sm);
 	const uint16_t leading_id = prules.token_id("LEADING_WS");
 	const uint16_t colon_id = prules.token_id("':'");
+	const uint16_t comma_id = prules.token_id("','");
 	const uint16_t open_curly_id = prules.token_id("'{'");
 	const uint16_t open_sq_id = prules.token_id("'['");
 	const uint16_t close_curly_id = prules.token_id("'}'");
 	const uint16_t close_sq_id = prules.token_id("']'");
+	const uint16_t nl = prules.token_id("'\\n'");
 	bool leading = false;
 	int indent = 0;
 
-	for (; iter->id; ++iter)
+	while (iter->id)
 	{
 		if (iter->id == leading_id)
 			leading = true;
 		else if (iter->id == colon_id)
-			std::cout << ": ";
+		{
+			std::cout << ':';
+			++iter;
+
+			if (iter->id != nl)
+				std::cout << ' ';
+
+			continue;
+		}
+		else if (iter->id == comma_id)
+		{
+			std::cout << ',';
+			++iter;
+
+			if (iter->id != nl)
+				std::cout << ' ';
+
+			continue;
+		}
 		else
 		{
 			if (iter->id == open_curly_id ||
@@ -104,6 +124,8 @@ void process_json(const switches& sw, const lexertl::memory_file& mf,
 
 			leading = false;
 		}
+
+		++iter;
 	}
 
 	std::cout << '\n';
