@@ -2,18 +2,18 @@
 
 Format JSON splitting over lines, or maintain lines and only normalise leading whitespace with the `--leading-ws` switch.
 
-Requires lexertl17 and parsertl17 to build.
+Requires <a href="https://github.com/BenHanson/lexertl17">lexertl17</a> and <a href="https://github.com/BenHanson/parsertl17">parsertl17</a> to build.
 
  ## Switches
 
- --help
+ `--help`
 
 Display help
 
- --indent &lt;num&gt;
+ `--indent <num>`
 
 Indent by `num` of spaces (defaults to 2)
 
---leading-ws
+`--leading-ws`
 
 Do not split lines as part of formatting
